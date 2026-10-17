@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Фалес және пирамида көлеңкесі</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600&family=Noto+Serif:wght@600;700&display=swap">
+<style>
+:root{--bg:#eef5f7;--sf:#fff;--ink:#12303b;--mu:#4b6670;--nile:#0e6b7a;--sun:#e8a317;--ln:#cfe0e5;--sand:#d9c38a;--sh:#12303b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1e24;--sf:#17303a;--ink:#e6f1f4;--mu:#9fb8c0;--nile:#4fb5c6;--sun:#f2b83a;--ln:#2a4752;--sand:#8a7a4c;--sh:#000;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1e24;--sf:#17303a;--ink:#e6f1f4;--mu:#9fb8c0;--nile:#4fb5c6;--sun:#f2b83a;--ln:#2a4752;--sand:#8a7a4c;--sh:#000;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Noto Sans",system-ui,sans-serif}
+.w{max-width:960px;margin:0 auto;padding:0 18px}
+h1,h2,h3{font-family:"Noto Serif",Georgia,serif;line-height:1.2;margin:0 0 .5em}
+h1{font-size:clamp(30px,6vw,52px)}h2{font-size:clamp(24px,4vw,34px)}h3{font-size:19px}
+p{margin:0 0 1em;max-width:70ch}
+nav{display:flex;gap:10px;flex-wrap:wrap;padding:14px 0}
+nav a{color:var(--ink);text-decoration:none;border:2px solid var(--nile);border-radius:999px;padding:6px 16px;font-weight:600}
+nav a:hover,nav a:focus-visible{background:var(--nile);color:var(--bg);outline:none}
+.hero{padding:26px 0 18px}
+.hero p{font-size:19px;color:var(--mu)}
+.sec{padding:30px 0;border-top:2px solid var(--ln)}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:18px 20px;margin:14px 0}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.g2{grid-template-columns:1fr}}
+.formula{font-family:"Noto Serif",serif;font-size:22px;text-align:center;color:var(--nile);font-weight:700;margin:6px 0}
+.story li{margin-bottom:.6em}
+.note{border-left:5px solid var(--sun);padding:6px 14px;background:var(--sf);border-radius:0 10px 10px 0;margin:14px 0}
+svg{width:100%;height:auto;display:block}
+.sim{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:12px}
+.ctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px 18px;margin:12px 0}
+.ctl label{display:block;font-weight:600;font-size:15px}
+.ctl input[type=range]{width:100%;accent-color:var(--nile)}
+button,input[type=number]{font:inherit}
+button{background:var(--nile);color:var(--bg);border:0;border-radius:10px;padding:8px 14px;font-weight:600;cursor:pointer}
+button.alt{background:transparent;color:var(--ink);border:2px solid var(--nile)}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s;padding:10px 12px 10px 48px;position:relative;border-bottom:1px solid var(--ln)}
+.steps li::before{content:counter(s);position:absolute;left:8px;top:10px;width:28px;height:28px;border-radius:50%;background:var(--sun);color:#12303b;font-weight:700;text-align:center;line-height:28px}
+.badge{display:inline-block;background:var(--sun);color:#12303b;font-weight:700;border-radius:8px;padding:2px 10px}
+.warn{color:#b3261e;font-weight:600}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .warn{color:#ff8a80}}
+details{background:var(--sf);border:1px solid var(--ln);border-radius:12px;padding:10px 16px;margin:10px 0}
+summary{cursor:pointer;font-weight:600}
+input[type=number]{width:110px;padding:6px 8px;border:2px solid var(--ln);border-radius:8px;background:var(--bg);color:var(--ink)}
+.fig{margin:14px 0}.fig figcaption{font-size:14px;color:var(--mu);margin-top:6px}
+.fig svg{background:var(--bg);border-radius:10px;border:1px solid var(--ln)}
+.story-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0}
+.hero svg{margin-top:10px}
+footer{padding:24px 0;color:var(--mu);font-size:14px}
+</style>
+</head>
+<body>
+<div class="w">
+<nav><a href="#legend">1. Аңыз бен түсініктеме</a><a href="#sim">2. Симулятор</a></nav>
+<header class="hero">
+<h1>Фалес пирамиданы көлеңке арқылы қалай өлшеді?</h1>
+<p>Биіктікке шықпай-ақ, тек таяқ пен көлеңкенің көмегімен: геометрияның ең әдемі аңыздарының бірі.</p>
+<svg viewBox="0 0 900 255" role="img" aria-label="Фалес таяқпен және пирамида көлеңкесі күн астында">
+<circle cx="70" cy="45" r="24" fill="var(--sun)"/>
+<line x1="260" y1="21" x2="544" y2="220" stroke="var(--sun)" stroke-width="2.5" stroke-dasharray="6 5"/>
+<line x1="570" y1="131" x2="697" y2="220" stroke="var(--sun)" stroke-width="2.5" stroke-dasharray="6 5"/>
+<line x1="10" y1="220" x2="890" y2="220" stroke="var(--ink)" stroke-width="2"/>
+<line x1="460" y1="220" x2="544" y2="220" stroke="var(--mu)" stroke-width="10" opacity=".5"/>
+<line x1="640" y1="220" x2="697" y2="220" stroke="var(--mu)" stroke-width="10" opacity=".5"/>
+<polygon points="200,220 460,220 330,70" fill="var(--sand)" stroke="var(--ink)" stroke-width="2"/>
+<polygon points="330,70 460,220 330,220" fill="var(--ink)" opacity=".12"/>
+<line x1="640" y1="220" x2="640" y2="180" stroke="var(--nile)" stroke-width="5" stroke-linecap="round"/>
+<g stroke="var(--ink)" stroke-width="3" stroke-linecap="round" fill="none"><circle cx="612" cy="172" r="8" fill="var(--ink)"/><line x1="612" y1="180" x2="612" y2="203"/><line x1="612" y1="203" x2="604" y2="220"/><line x1="612" y1="203" x2="620" y2="220"/><line x1="612" y1="188" x2="638" y2="182"/></g>
+<text x="330" y="244" text-anchor="middle" fill="var(--ink)" font-size="16">Пирамида</text>
+<text x="650" y="244" text-anchor="middle" fill="var(--ink)" font-size="16">Фалес пен таяқ</text>
+</svg>
+</header>
+
+<section class="sec" id="legend">
+<h2>1. Аңыз, анықтама және түсініктеме</h2>
+
+<div class="card">
+<h3>Фалес кім?</h3>
+<p>Фалес Милеттік (шамамен б.з.б. 624–546 жж.) ежелгі грек ойшылы, «жеті данышпанның» бірі. Ол геометрияны дәлелдеуге тырысқан алғашқы ғалымдардың қатарында аталады.</p>
+</div>
+
+<div class="card">
+<h3>Аңыз</h3>
+<ul class="story">
+<li>Фалес Мысырға келеді. Фараон мен рухани қызметкерлер оның даналығын сынағысы келіп: «Ұлы пирамиданың биіктігін қалай білуге болады?» деп сұрайды.</li>
+<li>Пирамиданың басына шығу мүмкін емес, ал ұзын жіппен өлшеу өте қиын.</li>
+<li>Фалес таяғын жерге тік қадайды да, күннің астында күтеді. Таяқтың көлеңкесі таяқтың өз ұзындығына тең болған сәтте, ол пирамиданың көлеңкесін өлшеп алады.</li>
+<li>Сол сәтте пирамиданың биіктігі де оның көлеңкесіне тең болады. Тек көлеңкені пирамиданың іргесінің ортасынан санау керек, сондықтан негізінің жартысын қосады.</li>
+</ul>
+<div class="story-g">
+<figure class="fig"><svg viewBox="0 0 200 135" role="img" aria-label="Пирамида және сұрақ белгісі"><circle cx="165" cy="25" r="10" fill="var(--sun)"/><line x1="5" y1="105" x2="195" y2="105" stroke="var(--ink)" stroke-width="2"/><polygon points="40,105 120,105 80,40" fill="var(--sand)" stroke="var(--ink)" stroke-width="2"/><text x="150" y="92" font-size="32" fill="var(--nile)" font-weight="700">?</text></svg><figcaption>1. Фараон сұрайды: пирамида қаншалықты биік?</figcaption></figure>
+<figure class="fig"><svg viewBox="0 0 200 135" role="img" aria-label="Тік қойылған таяқ және оның көлеңкесі"><circle cx="15" cy="25" r="10" fill="var(--sun)"/><line x1="15" y1="25" x2="105" y2="105" stroke="var(--sun)" stroke-width="2" stroke-dasharray="5 4"/><line x1="5" y1="105" x2="195" y2="105" stroke="var(--ink)" stroke-width="2"/><line x1="60" y1="105" x2="105" y2="105" stroke="var(--mu)" stroke-width="7" opacity=".5"/><line x1="60" y1="105" x2="60" y2="65" stroke="var(--nile)" stroke-width="4" stroke-linecap="round"/></svg><figcaption>2. Фалес таяғын тік қадап, көлеңкесін бақылайды.</figcaption></figure>
+<figure class="fig"><svg viewBox="0 0 200 135" role="img" aria-label="Таяқ пен көлеңкесі тең, күн 45 градус"><line x1="5" y1="15" x2="95" y2="105" stroke="var(--sun)" stroke-width="2" stroke-dasharray="5 4"/><line x1="5" y1="105" x2="195" y2="105" stroke="var(--ink)" stroke-width="2"/><line x1="50" y1="105" x2="95" y2="105" stroke="var(--mu)" stroke-width="7" opacity=".5"/><line x1="50" y1="105" x2="50" y2="60" stroke="var(--nile)" stroke-width="4" stroke-linecap="round"/><text x="42" y="88" text-anchor="end" font-size="14" fill="var(--nile)">h</text><text x="72" y="125" text-anchor="middle" font-size="14" fill="var(--ink)">l</text><text x="150" y="60" text-anchor="middle" font-size="20" fill="var(--nile)" font-weight="700">l = h</text></svg><figcaption>3. Көлеңке таяқтың ұзындығына тең болған сәт.</figcaption></figure>
+<figure class="fig"><svg viewBox="0 0 200 135" role="img" aria-label="Пирамида көлеңкесінің өлшемі"><line x1="10" y1="12" x2="150" y2="105" stroke="var(--sun)" stroke-width="2" stroke-dasharray="5 4"/><line x1="5" y1="105" x2="195" y2="105" stroke="var(--ink)" stroke-width="2"/><line x1="90" y1="105" x2="150" y2="105" stroke="var(--mu)" stroke-width="7" opacity=".5"/><polygon points="30,105 90,105 60,45" fill="var(--sand)" stroke="var(--ink)" stroke-width="2"/><line x1="60" y1="117" x2="90" y2="117" stroke="var(--ink)"/><line x1="90" y1="117" x2="150" y2="117" stroke="var(--nile)"/><text x="75" y="130" text-anchor="middle" font-size="12" fill="var(--ink)">b/2</text><text x="120" y="130" text-anchor="middle" font-size="12" fill="var(--nile)">S</text></svg><figcaption>4. Пирамида көлеңкесін өлшеп, іргенің жартысын қосады.</figcaption></figure>
+</div>
+<p>Бұл оқиғаны ежелгі авторлар Диоген Лаэртский мен Плутарх әртүрлі нұсқада баяндаған.</p>
+<div class="note">Бұл — аңыз. Тарихшылар оның дәл осылай болғанын дәлелдей алмайды, бірақ идеясы математикалық тұрғыдан мінсіз.</div>
+</div>
+
+<div class="g2">
+<div class="card">
+<h3>Анықтама: ұқсас үшбұрыштар</h3>
+<p>Сәйкес бұрыштары тең, ал сәйкес қабырғалары пропорционал үшбұрыштар ұқсас деп аталады.</p>
+</div>
+<div class="card">
+<h3>Неге бұл жұмыс істейді?</h3>
+<p>Күн өте алыс, сондықтан сәулелері параллель деп есептеледі. Бір мезгілде таяқ та, пирамида да жерге бірдей бұрышпен түскен сәуле тудырады. Екі тікбұрышты үшбұрыш пайда болады және олар ұқсас.</p>
+</div>
+</div>
+
+<figure class="fig card"><svg viewBox="0 0 900 240" role="img" aria-label="Екі ұқсас тікбұрышты үшбұрыш: пирамида және таяқ"><polygon points="60,200 360,200 60,80" fill="var(--sand)" fill-opacity=".6" stroke="var(--ink)" stroke-width="2"/><polygon points="695,200 820,200 695,150" fill="var(--nile)" fill-opacity=".35" stroke="var(--nile)" stroke-width="2"/><polyline points="60,190 70,190 70,200" fill="none" stroke="var(--ink)"/><polyline points="695,190 705,190 705,200" fill="none" stroke="var(--ink)"/><path d="M320 200 A40 40 0 0 1 322.9 185.1" fill="none" stroke="var(--ink)" stroke-width="2"/><path d="M790 200 A30 30 0 0 1 792.2 188.9" fill="none" stroke="var(--nile)" stroke-width="2"/><g font-size="18"><text x="46" y="145" text-anchor="end" fill="var(--ink)">H</text><text x="210" y="226" text-anchor="middle" fill="var(--ink)">S + b/2</text><text x="300" y="190" text-anchor="middle" fill="var(--ink)">α</text><text x="683" y="180" text-anchor="end" fill="var(--nile)">h</text><text x="757" y="226" text-anchor="middle" fill="var(--nile)">l</text><text x="772" y="190" text-anchor="middle" fill="var(--nile)">α</text></g></svg><figcaption>Екі тікбұрышты үшбұрыштың α бұрышы ортақ, сондықтан олар ұқсас. Үлкені — пирамида, кішісі — таяқ.</figcaption></figure>
+
+<div class="card">
+<h3>Формула</h3>
+<div class="formula">H / (S + b/2) = h / l</div>
+<p>Мұндағы: H — пирамиданың биіктігі (білмейміз), S — пирамида көлеңкесінің іргеден бастап ұзындығы, b — ірге қабырғасы (b/2 — жартысы), h — таяқтың биіктігі, l — таяқтың көлеңкесі.</p>
+<div class="formula">H = h · (S + b/2) / l</div>
+<p><strong>Фалес сәті:</strong> l = h болса, онда H = S + b/2. Бұл жағдайда есептеу қажет емес.</p>
+</div>
+</section>
+
+<section class="sec" id="sim">
+<h2>2. Симулятор: көлеңке арқылы биіктікті табу</h2>
+<p>Күннің биіктігін өзгертіп, көлеңкелердің қалай созылатынын көрсетіңіз. Қадамдар төменде сандармен жаңарып отырады.</p>
+
+<div class="sim">
+<svg id="sc" viewBox="0 0 900 340" role="img" aria-label="Пирамида, таяқ және олардың көлеңкелері"></svg>
+<div class="row">
+<button id="p1" class="alt">Сынып моделі (см)</button>
+<button id="p2" class="alt">Хеопс пирамидасы (м)</button>
+<button id="th">Фалес сәтіне қою</button>
+<label><input type="checkbox" id="st"> Оқушы режимі: жауапты жасыру</label>
+</div>
+<div class="ctl">
+<div><label>Күннің биіктігі: <span id="va"></span>°</label><input type="range" id="a" min="15" max="75" value="40"></div>
+<div><label>Таяқтың биіктігі h: <span id="vh"></span></label><input type="range" id="h" min="1" max="200" value="30"></div>
+<div><label>Пирамида биіктігі H: <span id="vH"></span></label><input type="range" id="H" min="20" max="200" value="60"></div>
+<div><label>Ірге қабырғасы b: <span id="vb"></span></label><input type="range" id="b" min="10" max="250" value="40"></div>
+</div>
+<div id="msg"></div>
+<ol class="steps" id="steps"></ol>
+</div>
+
+<h3 style="margin-top:22px">Сабаққа дайындық</h3>
+<details open><summary>Күн сәулесімен нақты эксперимент (аулада)</summary>
+<ol>
+<li>Күн ашық күнді таңдаңыз. Таяқ (1 м сызғыш), рулетка, бор және мектеп ғимараты не ағаш қажет.</li>
+<li>Таяқты тік қойып, көлеңкесін 10 минут сайын өлшеңіз. Көлеңке мен таяқ ұзындығы тең болған сәтті белгілеңіз.</li>
+<li>Дәл сол сәтте ағаштың (ғимараттың) көлеңкесін өлшеңіз. Көлеңке ұзындығы биіктікке тең.</li>
+<li>Басқа уақытта өлшесеңіз, H = h·L/l формуласын қолданыңыз және екі нәтижені салыстырыңыз.</li>
+</ol>
+</details>
+<details><summary>Квест-ойын: «Фалестің қазынасы» (4 бекет)</summary>
+<ol>
+<li><strong>Аңыз шифры.</strong> Топ аңыздан 3 сұраққа жауап беріп, кодты ашады (мысалы, таяқтың көлеңкесі қашан тең болады?).</li>
+<li><strong>Көлеңке аулаушылар.</strong> Топ таяқ пен ағаштың көлеңкесін өлшеп, нәтижені карточкаға жазады.</li>
+<li><strong>Үшбұрыш жинау.</strong> Қиылған қағаздан екі ұқсас үшбұрышты құрастырып, сәйкес қабырғаларды белгілейді.</li>
+<li><strong>Қазына.</strong> Топ формулаға сандарды қойып, ағаштың биіктігін табады. Дұрыс жауап қазына жәшігінің кодын береді.</li>
+</ol>
+</details>
+</section>
+<footer>Сызба — оқу мақсатына арналған модель. Нақты пирамидада таяқ пен пирамида масштабпен сыйыспайды.</footer>
+</div>
+
+<script>
+var $=function(i){return document.getElementById(i)};
+var u="см";
+function f(x){return (Math.round(x*10)/10).toString().replace(".",",")}
+function sv(t){return t}
+function draw(){
+ var a=+$("a").value,h=+$("h").value,H=+$("H").value,b=+$("b").value;
+ $("va").textContent=a;$("vh").textContent=h+" "+u;$("vH").textContent=H+" "+u;$("vb").textContent=b+" "+u;
+ var t=Math.tan(a*Math.PI/180),L=H/t,l=h/t,S=L-b/2;
+ var W=900,m=40,gap=50,gy=290;
+ var tot=b/2+L+l;
+ var s=Math.min((W-2*m-gap)/tot,200/H);
+ var px=m+b/2*s,tip=px+L*s,xs=tip+gap,hp=Math.max(h*s,26),clamp=h*s<26;
+ var g="";
+ g+='<rect x="0" y="0" width="900" height="340" fill="var(--bg)"/>';
+ g+='<circle cx="60" cy="40" r="22" fill="var(--sun)"/>';
+ for(var i=0;i<4;i++){var x0=100+i*34,y0=24+i*18,d=60,dx=d*Math.cos(a*Math.PI/180),dy=d*Math.sin(a*Math.PI/180);
+  g+='<line x1="'+x0+'" y1="'+y0+'" x2="'+(x0+dx)+'" y2="'+(y0+dy)+'" stroke="var(--sun)" stroke-width="3" stroke-linecap="round"/>';}
+ g+='<line x1="10" y1="'+gy+'" x2="890" y2="'+gy+'" stroke="var(--ink)" stroke-width="2"/>';
+ if(S>0){g+='<line x1="'+(px+b/2*s)+'" y1="'+gy+'" x2="'+tip+'" y2="'+gy+'" stroke="var(--mu)" stroke-width="9" opacity=".55"/>';}
+ g+='<polygon points="'+(px-b/2*s)+','+gy+' '+(px+b/2*s)+','+gy+' '+px+','+(gy-H*s)+'" fill="var(--sand)" stroke="var(--ink)" stroke-width="2"/>';
+ g+='<line x1="'+px+'" y1="'+gy+'" x2="'+px+'" y2="'+(gy-H*s)+'" stroke="var(--ink)" stroke-dasharray="5 4"/>';
+ g+='<line x1="'+xs+'" y1="'+gy+'" x2="'+(xs+l*s)+'" y2="'+gy+'" stroke="var(--mu)" stroke-width="9" opacity=".55"/>';
+ g+='<line x1="'+xs+'" y1="'+gy+'" x2="'+xs+'" y2="'+(gy-hp)+'" stroke="var(--nile)" stroke-width="6" stroke-linecap="round"/>';
+ g+='<text x="'+(px-8)+'" y="'+(gy-H*s/2)+'" text-anchor="end" fill="var(--ink)" font-size="18">H</text>';
+ g+='<text x="'+(xs-10)+'" y="'+(gy-hp/2)+'" text-anchor="end" fill="var(--nile)" font-size="18">h</text>';
+ g+='<line x1="'+px+'" y1="308" x2="'+(px+b/2*s)+'" y2="308" stroke="var(--ink)"/><text x="'+(px+b/4*s)+'" y="326" text-anchor="middle" fill="var(--ink)" font-size="15">b/2</text>';
+ if(S>0){g+='<line x1="'+(px+b/2*s)+'" y1="308" x2="'+tip+'" y2="308" stroke="var(--ink)"/><text x="'+((px+b/2*s+tip)/2)+'" y="326" text-anchor="middle" fill="var(--ink)" font-size="15">S</text>';}
+ g+='<line x1="'+xs+'" y1="308" x2="'+(xs+l*s)+'" y2="308" stroke="var(--nile)"/><text x="'+(xs+l*s/2)+'" y="326" text-anchor="middle" fill="var(--nile)" font-size="15">l</text>';
+ $("sc").innerHTML=g;
+ var st=$("st").checked,m2="",o="";
+ if(S<=0){m2='<p class="warn">Көлеңке пирамиданың ішінде қалды. Күнді төмендетіңіз.</p>';$("steps").innerHTML="";$("msg").innerHTML=m2;return}
+ if(clamp)m2+='<p class="note">Таяқ масштабсыз сызылған: нақты өлшемде тым кіші көрінер еді.</p>';
+ if(Math.abs(l-h)<=h*0.03)m2+='<p><span class="badge">Фалес сәті!</span> Таяқтың көлеңкесі таяқтың өзіндей: l = h, сондықтан H = S + b/2.</p>';
+ $("msg").innerHTML=m2;
+ o+='<li>Таяқ: h = <b>'+f(h)+' '+u+'</b>, көлеңкесі l = <b>'+f(l)+' '+u+'</b>.</li>';
+ o+='<li>Пирамида көлеңкесі іргеден: S = <b>'+f(S)+' '+u+'</b>. Іргенің жартысы: b/2 = <b>'+f(b/2)+' '+u+'</b>. Көлеңкенің толық ұзындығы: S + b/2 = <b>'+f(S+b/2)+' '+u+'</b>.</li>';
+ o+='<li>Үшбұрыштар ұқсас, сондықтан H / '+f(S+b/2)+' = '+f(h)+' / '+f(l)+'.</li>';
+ if(!st){o+='<li>H = '+f(h)+' · '+f(S+b/2)+' / '+f(l)+' = <b>'+f(h*(S+b/2)/l)+' '+u+'</b>. Жауап пирамиданың нақты биіктігімен сәйкес келеді.</li>'}
+ else{o+='<li>Өзіңіз есептеңіз: H = <input type="number" id="gs" step="0.1" aria-label="H жауабы"> '+u+' <button id="ck">Тексеру</button> <span id="rs"></span></li>'}
+ $("steps").innerHTML=o;
+ if(st){$("ck").onclick=function(){var v=parseFloat(($("gs").value||"").replace(",","."));$("rs").textContent=isNaN(v)?"Санды енгізіңіз.":(Math.abs(v-H)<=H*0.02?"Дұрыс! H = "+f(H)+" "+u:"Қайта тексеріңіз: S + b/2 мен l қолданылды ма?");}}
+}
+["a","h","H","b"].forEach(function(i){$(i).addEventListener("input",draw)});
+$("st").addEventListener("change",draw);
+function pre(v,uu){u=uu;$("h").value=v[0];$("H").value=v[1];$("b").value=v[2];$("a").value=v[3];draw()}
+$("p1").onclick=function(){pre([30,60,40,40],"см")};
+$("p2").onclick=function(){pre([2,147,230,35],"м")};
+$("th").onclick=function(){$("a").value=45;draw()};
+draw();
+</script>
+</body>
+</html>
